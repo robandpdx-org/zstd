@@ -15,11 +15,10 @@ jobs:
       options: --entrypoint /bin/bash
     env:
       CIRCLE_ARTIFACTS: "/tmp/circleci-artifacts"
-      NVM_DIR: "/home/runner/.nvm"
+      NVM_DIR: "/tmp/nvm"
     steps:
     - name: Manually set nodejs version
       run: |
-        cd /home/runner
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
         nvm install 16
