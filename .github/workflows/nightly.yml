@@ -29,12 +29,8 @@ jobs:
         sudo apt-get install gawk patchelf bison
         cd /tmp
         curl -O https://ftp.gnu.org/gnu/glibc/glibc-2.28.tar.gz
-        ls
         tar -zxf glibc-2.28.tar.gz
-        ls
-        mkdir glibc-2.28/build && cd $_
-        pwd
-        ls
+        mkdir glibc-2.28/build && cd glibc-2.28/build
         ../configure --prefix=/opt/glibc-2.28
         make -j 4
         sudo make install
