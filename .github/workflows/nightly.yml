@@ -9,7 +9,7 @@ on:
     - master
 jobs:
   regression-test:
-    runs-on: macos-latest
+    runs-on: ubuntu-20.04
     container:
       image: fbopensource/zstd-circleci-primary:0.0.1
     env:
