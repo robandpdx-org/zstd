@@ -26,8 +26,10 @@ jobs:
         mkdir $NVM_DIR
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        node -v
         nvm install 20
-        sudo ln -s /tmp/nvm/versions/node/v20.11.0/bin/node /usr/local/bin/node
+        #sudo ln -s /tmp/nvm/versions/node/v20.11.0/bin/node /usr/local/bin/node
+        node -v
         sudo apt-get update
         sudo apt-get install gawk patchelf bison
         cd /tmp
