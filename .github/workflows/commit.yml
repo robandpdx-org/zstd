@@ -6,10 +6,12 @@ on:
 jobs:
   short-tests-0:
     runs-on: ubuntu-latest
-    container:
-      image: fbopensource/zstd-circleci-primary:0.0.1
+    services:
+      docker:
+        image: fbopensource/zstd-circleci-primary:0.0.1
+        options: --entrypoint /bin/bash
     steps:
-    - uses: actions/checkout@v4.1.0
+    - uses: actions/checkout@v4
     - name: Test
       run: |
         ./tests/test-license.py
@@ -22,10 +24,12 @@ jobs:
         make cxxtest; make clean
   short-tests-1:
     runs-on: ubuntu-latest
-    container:
-      image: fbopensource/zstd-circleci-primary:0.0.1
+    services:
+      docker:
+        image: fbopensource/zstd-circleci-primary:0.0.1
+        options: --entrypoint /bin/bash
     steps:
-    - uses: actions/checkout@v4.1.0
+    - uses: actions/checkout@v4
     - name: Test
       run: |-
         make gnu90build; make clean
@@ -38,14 +42,16 @@ jobs:
         make -C lib libzstd-nomt; make clean
   regression-test:
     runs-on: ubuntu-latest
-    container:
-      image: fbopensource/zstd-circleci-primary:0.0.1
+    services:
+      docker:
+        image: fbopensource/zstd-circleci-primary:0.0.1
+        options: --entrypoint /bin/bash
     env:
       CIRCLE_ARTIFACTS: "/tmp/circleci-artifacts"
     steps:
-    - uses: actions/checkout@v4.1.0
+    - uses: actions/checkout@v4
     - name: restore_cache
-      uses: actions/cache@v3.3.2
+      uses: actions/cache@v3
       with:
         key: regression-cache-{{ checksum "tests/regression/data.c" }}-v0
         path: tests/regression/cache
@@ -65,6 +71,6 @@ jobs:
         echo "      are still good, copy it into the repo and commit it."
         echo "> diff tests/regression/results.csv $CIRCLE_ARTIFACTS/results.csv"
         diff tests/regression/results.csv $CIRCLE_ARTIFACTS/results.csv
-    - uses: actions/upload-artifact@v4.0.0
+    - uses: actions/upload-artifact@v4
       with:
         path: "/tmp/circleci-artifacts"
