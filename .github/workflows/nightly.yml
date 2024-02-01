@@ -15,13 +15,12 @@ jobs:
       options: --entrypoint /bin/bash
     env:
       CIRCLE_ARTIFACTS: "/tmp/circleci-artifacts"
+      NVM_DIR: "/home/runner/.nvm"
     steps:
-    - name: Fix nodejs
+    - name: Manually set nodejs version
       run: |
-        sudo chown -R $USER:$USER $HOME
-        chmod u+w $HOME
+        cd /home/runner
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-        export NVM_DIR="$HOME/.nvm"
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
         nvm install 16
     - uses: actions/checkout@v4.1.0
