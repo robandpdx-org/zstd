@@ -12,14 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fbopensource/zstd-circleci-primary:0.0.1
-      options: --entrypoint /bin/sh
+      options: --entrypoint /bin/bash
     env:
       CIRCLE_ARTIFACTS: "/tmp/circleci-artifacts"
     steps:
     - name: Fix nodejs
       run: |
+        cd
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+        . .bashrc
         nvm install 16
-        nvm use 16
     - uses: actions/checkout@v4.1.0
     - uses: actions/cache@v3.3.2
       with:
