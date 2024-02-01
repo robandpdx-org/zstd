@@ -22,7 +22,7 @@ jobs:
         mkdir $NVM_DIR
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-        nvm install 16
+        nvm install 18
     - uses: actions/checkout@v4.1.0
     - uses: actions/cache@v3.3.2
       with:
