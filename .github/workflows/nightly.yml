@@ -15,6 +15,9 @@ jobs:
     env:
       CIRCLE_ARTIFACTS: "/tmp/circleci-artifacts"
     steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
     - uses: actions/checkout@v4.1.0
     - uses: actions/cache@v3.3.2
       with:
@@ -24,9 +27,6 @@ jobs:
     - uses: actions/upload-artifact@v4.0.0
       with:
         path: "/tmp/circleci-artifacts"
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 18
     - name: Regression Test
       run: |-
         make -C programs zstd
