@@ -18,7 +18,7 @@ jobs:
     steps:
     - name: Fix nodejs
       run: |
-        cd
+        sudo chmod u+w /github/home && cd
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
         . .bashrc
         nvm install 16
