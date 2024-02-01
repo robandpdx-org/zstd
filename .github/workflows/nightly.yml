@@ -15,7 +15,7 @@ jobs:
         image: fbopensource/zstd-circleci-primary:0.0.1
         ports:
           - 8080:80
-        options: --entrypoint /bin/bashl --network=host
+        options: --entrypoint /bin/bash
     env:
       CIRCLE_ARTIFACTS: "/tmp/circleci-artifacts"
       NVM_DIR: "/tmp/nvm"
