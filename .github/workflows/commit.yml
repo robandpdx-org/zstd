@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4.1.0
     - name: Test
-      run: |-
+      run: |
         ./tests/test-license.py
         cc -v
         CFLAGS="-O0 -Werror -pedantic" make allmost; make clean
@@ -51,7 +51,7 @@ jobs:
         path: tests/regression/cache
         restore-keys: regression-cache-{{ checksum "tests/regression/data.c" }}-v0
     - name: Regression Test
-      run: |-
+      run: |
         make -C programs zstd
         make -C tests/regression test
         mkdir -p $CIRCLE_ARTIFACTS
