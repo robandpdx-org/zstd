@@ -12,6 +12,10 @@ jobs:
         options: --entrypoint /bin/bash
     steps:
     - uses: actions/checkout@v4
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install libcurl-dev
     - name: Test
       run: |
         ./tests/test-license.py
@@ -30,6 +34,10 @@ jobs:
         options: --entrypoint /bin/bash
     steps:
     - uses: actions/checkout@v4
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install libcurl-dev
     - name: Test
       run: |-
         make gnu90build; make clean
@@ -56,6 +64,10 @@ jobs:
         key: regression-cache-{{ checksum "tests/regression/data.c" }}-v0
         path: tests/regression/cache
         restore-keys: regression-cache-{{ checksum "tests/regression/data.c" }}-v0
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install libcurl-dev
     - name: Regression Test
       run: |
         make -C programs zstd
