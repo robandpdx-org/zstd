@@ -9,15 +9,12 @@ on:
     - master
 jobs:
   regression-test:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     container:
       image: fbopensource/zstd-circleci-primary:0.0.1
     env:
       CIRCLE_ARTIFACTS: "/tmp/circleci-artifacts"
     steps:
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 18
     - uses: actions/checkout@v4.1.0
     - uses: actions/cache@v3.3.2
       with:
@@ -28,7 +25,7 @@ jobs:
       with:
         path: "/tmp/circleci-artifacts"
     - name: Regression Test
-      run: |-
+      run: |
         make -C programs zstd
         make -C tests/regression test
         mkdir -p $CIRCLE_ARTIFACTS
