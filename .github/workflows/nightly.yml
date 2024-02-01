@@ -15,14 +15,21 @@ jobs:
       options: --entrypoint /bin/bash
     env:
       CIRCLE_ARTIFACTS: "/tmp/circleci-artifacts"
+      NVM_DIR: "/tmp/nvm"
     steps:
+    - name: Manually set nodejs version
+      run: |
+        mkdir $NVM_DIR
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        nvm install 16
     - uses: actions/checkout@v3
-    - uses: actions/cache@v3.3.2
+    - uses: actions/cache@v3
       with:
         key: regression-cache-{{ checksum "tests/regression/data.c" }}-v0
         path: tests/regression/cache
         restore-keys: regression-cache-{{ checksum "tests/regression/data.c" }}-v0
-    - uses: actions/upload-artifact@v4.0.0
+    - uses: actions/upload-artifact@v4
       with:
         path: "/tmp/circleci-artifacts"
     - name: Regression Test
