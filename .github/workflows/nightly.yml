@@ -10,9 +10,12 @@ on:
 jobs:
   regression-test:
     runs-on: ubuntu-latest
-    container:
-      image: fbopensource/zstd-circleci-primary:0.0.1
-      options: --entrypoint /bin/bash
+    services:
+      docker:
+        image: fbopensource/zstd-circleci-primary:0.0.1
+        ports:
+          - 8080:80
+        options: --entrypoint /bin/bashl --network=host
     env:
       CIRCLE_ARTIFACTS: "/tmp/circleci-artifacts"
       NVM_DIR: "/tmp/nvm"
