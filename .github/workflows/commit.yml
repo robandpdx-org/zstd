@@ -37,7 +37,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install libcurl4-gnutls-dev gcc-powerpc-linux-gnu libc6-dev-ppc64-powerpc-cross lib64gcc-11-dev-powerpc-cross gcc-arm-linux-gnueabi
+        sudo apt-get install gcc-powerpc-linux-gnu gcc-arm-linux-gnueabi gcc-aarch64-linux-gnu libc6-dev-ppc64-powerpc-cross libcurl4-gnutls-dev lib64gcc-11-dev-powerpc-cross
     - name: Test
       run: |-
         make gnu90build; make clean
